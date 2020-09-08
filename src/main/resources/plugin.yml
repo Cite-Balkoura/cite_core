@@ -1,0 +1,65 @@
+name: Cite-core
+author: MileKat
+main: fr.milekat.cite_core.MainCore
+version: '1.0'
+api-version: '1.16'
+description: plugin cite au émeraudes par MileKat
+depend: [Cite-libs, ProtocolLib]
+commands:
+  event:
+    usage: "/event help"
+    description: "Liste de toutes les commandes relatives au events"
+  sign:
+    aliases:
+    - sign_edit
+    usage: "/sign <ligne> <text>"
+    permission: modo.core.sign.edit
+    permission-message: "§cVous n'avez pas la permission d'utiliser cette commande."
+    description: "Commande pour éditer un panneau"
+  web:
+    aliases:
+    - wiki
+    - reglement
+    - forum
+    - boutique
+    usage: "/web|wiki|reglement|forum|boutique !"
+    description: "Accède rapidement au site !"
+  speed:
+    usage: "/speed"
+    permission: modo.core.command.speed
+    permission-message: "§cVous n'avez pas la permission d'utiliser cette commande."
+    description: "Set player speed"
+  scoreboard:
+    usage: "/scoreboard"
+    aliases:
+    - sc
+    - board
+    description: "Affiche ou retire votre scoreboard"
+permissions:
+  modo.core.event.placebox:
+    description: "E: Placer des eventbox"
+    default: op
+  modo.core.event.boxopen:
+    description: "E: Ouvrir des eventbox"
+    default: op
+  modo.core.event.boxbreak:
+    description: "E: Détruire & sauvegarder des eventbox"
+    default: op
+  modo.core.event.getbox:
+    description: "C: Obtenir l'eventbox d'un joueur"
+    default: op
+  modo.core.event.seebox:
+    description: "C: Voir l'eventbox d'un joueur (sans edit)"
+    default: op
+  modo.core.event.give:
+    description: "C: Ajoute l'item dans la main à joueur dans l'EventBox"
+    default: op
+  modo.core.chat.removemsg:
+    description: "C: Supprimer un message dans le chat"
+    default: op
+  modo.core.chat.mute:
+    description: "C: Mute chat (Sans limite de temps)"
+    default: op
+  modo.core.allow_url:
+    description: "C: Autorise un URL"
+    default: op
