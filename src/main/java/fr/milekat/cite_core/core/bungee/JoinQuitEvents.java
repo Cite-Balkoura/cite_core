@@ -3,7 +3,6 @@ package fr.milekat.cite_core.core.bungee;
 import fr.milekat.cite_core.MainCore;
 import fr.milekat.cite_core.core.obj.Profil;
 import fr.milekat.cite_core.utils_tools.Boards.FastBoard;
-import fr.milekat.cite_libs.MainLibs;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,8 +18,8 @@ public class JoinQuitEvents implements Listener {
     @EventHandler
     public void JoinEvent(PlayerJoinEvent event) {
         event.setJoinMessage(null);
-        event.getPlayer().sendMessage(MainCore.prefixCmd + "§6Vous voici sur " +
-                MainLibs.getInstance().getConfig().getString("other.join_server_name"));
+        /*event.getPlayer().sendMessage(MainCore.prefixCmd + "§6Vous voici sur " +
+                MainLibs.getInstance().getConfig().getString("other.join_server_name"));*/
         Profil profil = getPlayerProfil(event.getPlayer().getUniqueId());
         if (profil!=null && profil.isScoreboard()) {
             MainCore.boards.put(event.getPlayer().getUniqueId(), new FastBoard(event.getPlayer()));

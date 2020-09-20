@@ -87,8 +87,16 @@ public class MainCore extends JavaPlugin {
         return MainLibs.sql;
     }
 
-    public static ArrayList<String> getTabArgs(String arg, String... args) {
-        List<String> MyStrings = new ArrayList<>(Arrays.asList(args));
+    public static ArrayList<String> getPlayersList(String arg) {
+        ArrayList<String> names = new ArrayList<>();
+        for (Profil profil : MainCore.profilHashMap.values()) {
+            names.add(profil.getName());
+        }
+        return getTabArgs(arg, names);
+    }
+
+    public static ArrayList<String> getTabArgs(String arg, List<String> MyStrings) {
+        //List<String> MyStrings = new ArrayList<>(Arrays.asList(args));
         ArrayList<String> MySortStrings = new ArrayList<>();
         for(String loop : MyStrings) {
             if(loop.toLowerCase().startsWith(arg.toLowerCase()))
