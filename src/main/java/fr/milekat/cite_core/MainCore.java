@@ -3,6 +3,7 @@ package fr.milekat.cite_core;
 import fr.milekat.cite_core.chat.ChatInsert;
 import fr.milekat.cite_core.core.bungee.BungeeSendPlayer;
 import fr.milekat.cite_core.core.bungee.JoinQuitEvents;
+import fr.milekat.cite_core.core.commands.ItemSerialCMD;
 import fr.milekat.cite_core.core.commands.SignEdit;
 import fr.milekat.cite_core.core.commands.Speed;
 import fr.milekat.cite_core.core.commands.WebLinks;
@@ -61,6 +62,7 @@ public class MainCore extends JavaPlugin {
         getCommand("sign").setExecutor(new SignEdit());
         getCommand("web").setExecutor(new WebLinks());
         getCommand("speed").setExecutor(new Speed());
+        getCommand("serialitem").setExecutor(new ItemSerialCMD());
         // Tab
         getCommand("event").setTabCompleter(new Event_Tab());
         // Scoreboard

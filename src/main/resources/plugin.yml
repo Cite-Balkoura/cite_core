@@ -35,6 +35,10 @@ commands:
     - sc
     - board
     description: "Affiche ou retire votre scoreboard"
+  serialitem:
+    usage: "/serialitem [<Base64Item]"
+    permission: modo.core.command.serialitem
+    permission-message: "§cVous n'avez pas la permission d'utiliser cette commande."
 permissions:
   modo.core.event.placebox:
     description: "E: Placer des eventbox"

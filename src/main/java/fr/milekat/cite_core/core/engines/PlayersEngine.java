@@ -9,6 +9,8 @@ import org.bukkit.scheduler.BukkitTask;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.UUID;
 
 public class PlayersEngine {
@@ -21,11 +23,17 @@ public class PlayersEngine {
             public void run() {
                 Connection connection = MainCore.getSQL().getConnection();
                 try {
-                    PreparedStatement q = connection.prepareStatement("SELECT  `uuid`, `name`, `team_id`, `scoreboard`, " +
-                            "`chat_mode`, `muted`, `banned`, `reason`, `modson`, `buildon`, `player_pts_event`, " +
-                            "`maintenance`, `discord_id` FROM `" + MainCore.SQLPREFIX + "player` WHERE `name` != 'Annonce';");
+                    PreparedStatement q = connection.prepareStatement(
+                            "SELECT  `uuid`, `name`, `team_id`, `scoreboard`, `chat_mode`, `muted`, `banned`, `reason`, " +
+                                "`modson`, `buildon`, `player_pts_event`, `maintenance`, `discord_id`, `crates` " +
+                                "FROM `" + MainCore.SQLPREFIX + "player` WHERE `name` != 'Annonce';");
                     q.execute();
                     while (q.getResultSet().next()) {
+                        HashMap<Integer, Integer> crates = new HashMap<>();
+                        for (String loop : q.getResultSet().getString("crates").split(";")) {
+                            int[] cratessplit = Arrays.stream(loop.split(":")).mapToInt(Integer::parseInt).toArray();
+                            crates.put(cratessplit[0],cratessplit[1]);
+                        }
                         MainCore.profilHashMap.put(UUID.fromString(q.getResultSet().getString("uuid")),
                                 new Profil(UUID.fromString(q.getResultSet().getString("uuid")),
                                         q.getResultSet().getString("name"),
@@ -39,7 +47,8 @@ public class PlayersEngine {
                                         q.getResultSet().getBoolean("scoreboard"),
                                         q.getResultSet().getInt("player_pts_event"),
                                         q.getResultSet().getBoolean("maintenance"),
-                                        q.getResultSet().getLong("discord_id")));
+                                        q.getResultSet().getLong("discord_id"),
+                                        crates));
                         MainCore.joueurslist.put(q.getResultSet().getString("name"),
                                 UUID.fromString(q.getResultSet().getString("uuid")));
                     }

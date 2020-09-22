@@ -1,5 +1,6 @@
 package fr.milekat.cite_core.core.obj;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 public class Profil {
@@ -16,8 +17,9 @@ public class Profil {
     private int ptsevent;
     private boolean maintenance;
     private final long discordid;
+    private HashMap<Integer, Integer> crates;
 
-    public Profil(UUID uuid, String name, int team, int chat_mode, String muted, String banned, String reason, boolean modson, boolean mods_build, boolean scoreboard, int ptsevent, boolean maintenance, long discordid) {
+    public Profil(UUID uuid, String name, int team, int chat_mode, String muted, String banned, String reason, boolean modson, boolean mods_build, boolean scoreboard, int ptsevent, boolean maintenance, long discordid, HashMap<Integer, Integer> crates) {
         this.uuid = uuid;
         this.name = name;
         this.team = team;
@@ -31,6 +33,7 @@ public class Profil {
         this.ptsevent = ptsevent;
         this.maintenance = maintenance;
         this.discordid = discordid;
+        this.crates = crates;
     }
 
     public UUID getUuid() {
@@ -135,5 +138,13 @@ public class Profil {
 
     public void setScoreboard(boolean scoreboard) {
         this.scoreboard = scoreboard;
+    }
+
+    public HashMap<Integer, Integer> getCrates() {
+        return crates;
+    }
+
+    public void setCrates(HashMap<Integer, Integer> crates) {
+        this.crates = crates;
     }
 }
