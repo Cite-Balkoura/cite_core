@@ -7,8 +7,10 @@ import fr.milekat.cite_core.core.commands.ItemSerialCMD;
 import fr.milekat.cite_core.core.commands.SignEdit;
 import fr.milekat.cite_core.core.commands.Speed;
 import fr.milekat.cite_core.core.commands.WebLinks;
+import fr.milekat.cite_core.core.crafts.HammerCraft;
 import fr.milekat.cite_core.core.engines.PlayersEngine;
 import fr.milekat.cite_core.core.engines.TeamEngine;
+import fr.milekat.cite_core.core.events.HammerNetheriteCraft;
 import fr.milekat.cite_core.core.events.RedisMessage;
 import fr.milekat.cite_core.core.obj.Profil;
 import fr.milekat.cite_core.core.obj.Team;
@@ -55,6 +57,7 @@ public class MainCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new Event_Event(),this);
         getServer().getPluginManager().registerEvents(new RedisMessage(),this);
         getServer().getPluginManager().registerEvents(new BungeeSendPlayer(),this);
+        getServer().getPluginManager().registerEvents(new HammerNetheriteCraft(),this);
         // Bungee Messaging
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         // Commandes
@@ -69,6 +72,9 @@ public class MainCore extends JavaPlugin {
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
             MainCore.boards.put(player.getUniqueId(), new FastBoard(player));
         }
+        // Craft
+        Bukkit.addRecipe(new HammerCraft().createDiamsHammer());
+        Bukkit.addRecipe(new HammerCraft().createIronHammer());
     }
 
     @Override
