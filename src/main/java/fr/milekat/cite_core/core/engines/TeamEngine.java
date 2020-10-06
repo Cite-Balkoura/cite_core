@@ -24,36 +24,40 @@ public class TeamEngine {
         return new BukkitRunnable() {
             @Override
             public void run() {
-                Connection connection = MainCore.getSQL().getConnection();
-                try {
-                    PreparedStatement q = connection.prepareStatement("SELECT * FROM `" + MainCore.SQLPREFIX + "team`;");
-                    q.execute();
-                    while (q.getResultSet().next()) {
-                        PreparedStatement q2 = connection.prepareStatement("SELECT `uuid` FROM `" + MainCore.SQLPREFIX +
-                                "player` WHERE `team_id` = ?;");
-                        q2.setInt(1,q.getResultSet().getInt("team_id"));
-                        q2.execute();
-                        ArrayList<Profil> members = new ArrayList<>();
-                        while (q2.getResultSet().next()) {
-                            members.add(MainCore.profilHashMap.
-                                    get(UUID.fromString(q2.getResultSet().getString("uuid"))));
-                        }
-                        q2.close();
-                        MainCore.teamHashMap.put(q.getResultSet().getInt("team_id"),
-                                new Team(q.getResultSet().getInt("team_id"),
-                                        q.getResultSet().getString("team_name"),
-                                        q.getResultSet().getString("team_tag"),
-                                        q.getResultSet().getInt("money"),
-                                        members,
-                                        getMapTradesUses(q.getResultSet().getString("team_trades_uses"))));
-                    }
-                    q.close();
-                } catch (SQLException throwables) {
-                    Bukkit.getLogger().warning("Impossible d'update la liste des équipes !");
-                    throwables.printStackTrace();
-                }
+                updateTeams();
             }
-        }.runTaskTimerAsynchronously(MainCore.getInstance(),0L,600L);
+        }.runTaskTimerAsynchronously(MainCore.getInstance(),600L,600L);
+    }
+
+    public void updateTeams() {
+        Connection connection = MainCore.getSQL().getConnection();
+        try {
+            PreparedStatement q = connection.prepareStatement("SELECT * FROM `" + MainCore.SQLPREFIX + "team`;");
+            q.execute();
+            while (q.getResultSet().next()) {
+                PreparedStatement q2 = connection.prepareStatement("SELECT `uuid` FROM `" + MainCore.SQLPREFIX +
+                        "player` WHERE `team_id` = ?;");
+                q2.setInt(1,q.getResultSet().getInt("team_id"));
+                q2.execute();
+                ArrayList<Profil> members = new ArrayList<>();
+                while (q2.getResultSet().next()) {
+                    members.add(MainCore.profilHashMap.
+                            get(UUID.fromString(q2.getResultSet().getString("uuid"))));
+                }
+                q2.close();
+                MainCore.teamHashMap.put(q.getResultSet().getInt("team_id"),
+                        new Team(q.getResultSet().getInt("team_id"),
+                                q.getResultSet().getString("team_name"),
+                                q.getResultSet().getString("team_tag"),
+                                q.getResultSet().getInt("money"),
+                                members,
+                                getMapTradesUses(q.getResultSet().getString("team_trades_uses"))));
+            }
+            q.close();
+        } catch (SQLException throwables) {
+            Bukkit.getLogger().warning("Impossible d'update la liste des équipes !");
+            throwables.printStackTrace();
+        }
     }
 
     public void saveTradesUses(Team team) {

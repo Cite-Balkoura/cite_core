@@ -49,10 +49,10 @@ public class MainCore extends JavaPlugin {
     @Override
     public void onEnable() {
         mainCore = this;
-        profilesTask = new PlayersEngine().runTask();
-        teamTask = new TeamEngine().runTask();
         // Event_Game load
         events = new Event_Init();
+        new PlayersEngine().updateProfiles();
+        new TeamEngine().updateTeams();
         // Events
         getServer().getPluginManager().registerEvents(new JoinQuitEvents(),this);
         getServer().getPluginManager().registerEvents(new Event_Event(),this);
@@ -76,6 +76,9 @@ public class MainCore extends JavaPlugin {
         // Craft
         Bukkit.addRecipe(new HammerCraft().createDiamsHammer());
         Bukkit.addRecipe(new HammerCraft().createIronHammer());
+        // Engines
+        profilesTask = new PlayersEngine().runTask();
+        teamTask = new TeamEngine().runTask();
     }
 
     @Override
