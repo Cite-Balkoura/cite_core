@@ -23,6 +23,7 @@ import fr.milekat.cite_libs.MainLibs;
 import fr.milekat.cite_libs.utils_tools.Jedis.JedisPub;
 import fr.milekat.cite_libs.utils_tools.MariaManage;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -79,6 +80,8 @@ public class MainCore extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        Bukkit.removeRecipe(new NamespacedKey(MainCore.getInstance(), "diamond_hammer"));
+        Bukkit.removeRecipe(new NamespacedKey(MainCore.getInstance(), "iron_hammer"));
         profilesTask.cancel();
         teamTask.cancel();
     }
