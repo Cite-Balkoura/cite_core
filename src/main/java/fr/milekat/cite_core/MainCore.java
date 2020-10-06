@@ -10,6 +10,7 @@ import fr.milekat.cite_core.core.commands.WebLinks;
 import fr.milekat.cite_core.core.crafts.HammerCraft;
 import fr.milekat.cite_core.core.engines.PlayersEngine;
 import fr.milekat.cite_core.core.engines.TeamEngine;
+import fr.milekat.cite_core.core.events.DamageModifiers;
 import fr.milekat.cite_core.core.events.HammerNetheriteCraft;
 import fr.milekat.cite_core.core.events.RedisMessage;
 import fr.milekat.cite_core.core.obj.Profil;
@@ -59,6 +60,7 @@ public class MainCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new RedisMessage(),this);
         getServer().getPluginManager().registerEvents(new BungeeSendPlayer(),this);
         getServer().getPluginManager().registerEvents(new HammerNetheriteCraft(),this);
+        getServer().getPluginManager().registerEvents(new DamageModifiers(),this);
         // Bungee Messaging
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         // Commandes
