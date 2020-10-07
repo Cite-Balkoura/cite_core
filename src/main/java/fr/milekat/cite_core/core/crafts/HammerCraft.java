@@ -9,13 +9,10 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class HammerCraft {
-
     public Recipe createDiamsHammer() {
         ItemStack item = new ItemStack(Material.DIAMOND_PICKAXE);
         ItemMeta meta = item.getItemMeta();
         if (meta!=null) {
-            /*meta.setUnbreakable(true);
-            meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);*/
             meta.setDisplayName("§rHammer en diams");
             meta.setCustomModelData(1);
             item.setItemMeta(meta);
@@ -32,8 +29,6 @@ public class HammerCraft {
         ItemStack item = new ItemStack(Material.IRON_PICKAXE);
         ItemMeta meta = item.getItemMeta();
         if (meta!=null) {
-            /*meta.setUnbreakable(true);
-            meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);*/
             meta.setDisplayName("§rHammer en fer");
             meta.setCustomModelData(1);
             item.setItemMeta(meta);

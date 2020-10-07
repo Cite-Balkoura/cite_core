@@ -7,7 +7,7 @@ import fr.milekat.cite_core.core.commands.ItemSerialCMD;
 import fr.milekat.cite_core.core.commands.SignEdit;
 import fr.milekat.cite_core.core.commands.Speed;
 import fr.milekat.cite_core.core.commands.WebLinks;
-import fr.milekat.cite_core.core.crafts.HammerCraft;
+import fr.milekat.cite_core.core.crafts.CraftManager;
 import fr.milekat.cite_core.core.engines.PlayersEngine;
 import fr.milekat.cite_core.core.engines.TeamEngine;
 import fr.milekat.cite_core.core.events.DamageModifiers;
@@ -24,7 +24,6 @@ import fr.milekat.cite_libs.MainLibs;
 import fr.milekat.cite_libs.utils_tools.Jedis.JedisPub;
 import fr.milekat.cite_libs.utils_tools.MariaManage;
 import org.bukkit.Bukkit;
-import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -76,8 +75,7 @@ public class MainCore extends JavaPlugin {
             MainCore.boards.put(player.getUniqueId(), new FastBoard(player));
         }
         // Craft
-        Bukkit.addRecipe(new HammerCraft().createDiamsHammer());
-        Bukkit.addRecipe(new HammerCraft().createIronHammer());
+        new CraftManager().loadCraft();
         // Engines
         profilesTask = new PlayersEngine().runTask();
         teamTask = new TeamEngine().runTask();
@@ -85,8 +83,8 @@ public class MainCore extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        Bukkit.removeRecipe(new NamespacedKey(MainCore.getInstance(), "diamond_hammer"));
-        Bukkit.removeRecipe(new NamespacedKey(MainCore.getInstance(), "iron_hammer"));
+        // Craft
+        new CraftManager().unLoadCraft();
         profilesTask.cancel();
         teamTask.cancel();
     }
