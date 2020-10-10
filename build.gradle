@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots' }
+    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url = 'https://repo.dmulloy2.net/nexus/repository/public/' }
+    maven { url = 'https://jitpack.io' }
+}
+
+sourceCompatibility = 1.8
+
+compileJava.options.encoding = 'UTF-8'
+
+setLibsDirName('C:/Users/arthu/Google Drive/Games/Minecraft/Dev/Java')
+archivesBaseName = 'cite_core'
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compileOnly group: 'redis.clients', name: 'jedis', version: '3.2.0'
+    compileOnly group: 'com.github.RealAlphaDEV', name: 'Ragot', version: 'v1.1.3'
+    compileOnly group: 'org.spigotmc', name: 'spigot-api', version: '1.16.1-R0.1-SNAPSHOT'
+    compileOnly group: 'net.md-5', name: 'bungeecord-chat', version: '1.16-R0.2-SNAPSHOT'
+    compileOnly group: 'com.comphenix.protocol', name: 'ProtocolLib', version: '4.5.0'
+    compileOnly files('C:/Users/arthu/Google Drive/Games/Minecraft/Dev/Java/cite_libs-all.jar')
+}
+
+mainClassName = 'fr.milekat.cite_core.MainCore'
