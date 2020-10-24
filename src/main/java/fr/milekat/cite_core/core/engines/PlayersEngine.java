@@ -30,8 +30,8 @@ public class PlayersEngine {
         Connection connection = MainCore.getSQL().getConnection();
         try {
             PreparedStatement q = connection.prepareStatement(
-                    "SELECT  `uuid`, `name`, `team_id`, `scoreboard`, `chat_mode`, `muted`, `banned`, `reason`, " +
-                            "`modson`, `buildon`, `player_pts_event`, `maintenance`, `discord_id`, `crates` " +
+                    "SELECT  `uuid`, `name`, `team_id`, `chat_mode`, `muted`, `banned`, `reason`, " +
+                            "`modson`, `buildon`, `maintenance`, `discord_id`, `crates` " +
                             "FROM `" + MainCore.SQLPREFIX + "player` WHERE `name` != 'Annonce';");
             q.execute();
             while (q.getResultSet().next()) {
@@ -50,8 +50,6 @@ public class PlayersEngine {
                                 q.getResultSet().getString("reason"),
                                 q.getResultSet().getBoolean("modson"),
                                 q.getResultSet().getBoolean("buildon"),
-                                q.getResultSet().getBoolean("scoreboard"),
-                                q.getResultSet().getInt("player_pts_event"),
                                 q.getResultSet().getBoolean("maintenance"),
                                 q.getResultSet().getLong("discord_id"),
                                 crates));

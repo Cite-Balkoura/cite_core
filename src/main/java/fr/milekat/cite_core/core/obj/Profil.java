@@ -13,13 +13,11 @@ public class Profil {
     private String reason;
     private boolean mods_chat;
     private boolean mods_build;
-    private boolean scoreboard;
-    private int ptsevent;
     private boolean maintenance;
     private final long discordid;
     private HashMap<Integer, Integer> crates;
 
-    public Profil(UUID uuid, String name, int team, int chat_mode, String muted, String banned, String reason, boolean modson, boolean mods_build, boolean scoreboard, int ptsevent, boolean maintenance, long discordid, HashMap<Integer, Integer> crates) {
+    public Profil(UUID uuid, String name, int team, int chat_mode, String muted, String banned, String reason, boolean modson, boolean mods_build, boolean maintenance, long discordid, HashMap<Integer, Integer> crates) {
         this.uuid = uuid;
         this.name = name;
         this.team = team;
@@ -29,8 +27,6 @@ public class Profil {
         this.reason = reason;
         this.mods_chat = modson;
         this.mods_build = mods_build;
-        this.scoreboard = scoreboard;
-        this.ptsevent = ptsevent;
         this.maintenance = maintenance;
         this.discordid = discordid;
         this.crates = crates;
@@ -88,14 +84,6 @@ public class Profil {
         this.mods_chat = mods_chat;
     }
 
-    public int getPtsevent() {
-        return ptsevent;
-    }
-
-    public void setPtsevent(int ptsevent) {
-        this.ptsevent = ptsevent;
-    }
-
     public boolean isMaintenance() {
         return maintenance;
     }
@@ -130,14 +118,6 @@ public class Profil {
 
     public void setMods_build(boolean mods_build) {
         this.mods_build = mods_build;
-    }
-
-    public boolean isScoreboard() {
-        return scoreboard;
-    }
-
-    public void setScoreboard(boolean scoreboard) {
-        this.scoreboard = scoreboard;
     }
 
     public HashMap<Integer, Integer> getCrates() {
