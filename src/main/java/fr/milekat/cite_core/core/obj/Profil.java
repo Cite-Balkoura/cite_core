@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class Profil {
     private final UUID uuid;
-    private String name;
+    private final String name;
     private int team;
     private int chat_mode;
     private String muted;
@@ -16,8 +16,10 @@ public class Profil {
     private boolean maintenance;
     private final long discordid;
     private HashMap<Integer, Integer> crates;
+    private final int points_quest;
+    private final int points_event;
 
-    public Profil(UUID uuid, String name, int team, int chat_mode, String muted, String banned, String reason, boolean modson, boolean mods_build, boolean maintenance, long discordid, HashMap<Integer, Integer> crates) {
+    public Profil(UUID uuid, String name, int team, int chat_mode, String muted, String banned, String reason, boolean modson, boolean mods_build, boolean maintenance, long discordid, HashMap<Integer, Integer> crates, int points_quest, int points_event) {
         this.uuid = uuid;
         this.name = name;
         this.team = team;
@@ -30,6 +32,8 @@ public class Profil {
         this.maintenance = maintenance;
         this.discordid = discordid;
         this.crates = crates;
+        this.points_quest = points_quest;
+        this.points_event = points_event;
     }
 
     public UUID getUuid() {
@@ -38,10 +42,6 @@ public class Profil {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getTeam() {
@@ -126,5 +126,13 @@ public class Profil {
 
     public void setCrates(HashMap<Integer, Integer> crates) {
         this.crates = crates;
+    }
+
+    public int getPoints_quest() {
+        return points_quest;
+    }
+
+    public int getPoints_event() {
+        return points_event;
     }
 }

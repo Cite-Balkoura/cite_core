@@ -31,7 +31,7 @@ public class PlayersEngine {
         try {
             PreparedStatement q = connection.prepareStatement(
                     "SELECT  `uuid`, `name`, `team_id`, `chat_mode`, `muted`, `banned`, `reason`, " +
-                            "`modson`, `buildon`, `maintenance`, `discord_id`, `crates` " +
+                            "`modson`, `buildon`, `maintenance`, `discord_id`, `crates`, `points_quest`, `points_event` " +
                             "FROM `" + MainCore.SQLPREFIX + "player` WHERE `name` != 'Annonce';");
             q.execute();
             while (q.getResultSet().next()) {
@@ -52,7 +52,9 @@ public class PlayersEngine {
                                 q.getResultSet().getBoolean("buildon"),
                                 q.getResultSet().getBoolean("maintenance"),
                                 q.getResultSet().getLong("discord_id"),
-                                crates));
+                                crates,
+                                q.getResultSet().getInt("points_quest"),
+                                q.getResultSet().getInt("points_event")));
                 MainCore.joueurslist.put(q.getResultSet().getString("name"),
                         UUID.fromString(q.getResultSet().getString("uuid")));
             }
