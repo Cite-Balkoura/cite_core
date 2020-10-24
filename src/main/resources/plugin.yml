@@ -29,15 +29,13 @@ commands:
     permission: modo.core.command.speed
     permission-message: "§cVous n'avez pas la permission d'utiliser cette commande."
     description: "Set player speed"
-  scoreboard:
-    usage: "/scoreboard"
-    aliases:
-    - sc
-    - board
-    description: "Affiche ou retire votre scoreboard"
   serialitem:
     usage: "/serialitem [<Base64Item]"
     permission: modo.core.command.serialitem
+    permission-message: "§cVous n'avez pas la permission d'utiliser cette commande."
+  points:
+    usage: "/points <quest/event> <joueur> <add/remove/set> <points>"
+    permission: modo.core.command.point
     permission-message: "§cVous n'avez pas la permission d'utiliser cette commande."
 permissions:
   modo.core.event.placebox:

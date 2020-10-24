@@ -3,10 +3,7 @@ package fr.milekat.cite_core;
 import fr.milekat.cite_core.chat.ChatInsert;
 import fr.milekat.cite_core.core.bungee.BungeeSendPlayer;
 import fr.milekat.cite_core.core.bungee.JoinQuitEvents;
-import fr.milekat.cite_core.core.commands.ItemSerialCMD;
-import fr.milekat.cite_core.core.commands.SignEdit;
-import fr.milekat.cite_core.core.commands.Speed;
-import fr.milekat.cite_core.core.commands.WebLinks;
+import fr.milekat.cite_core.core.commands.*;
 import fr.milekat.cite_core.core.crafts.CraftManager;
 import fr.milekat.cite_core.core.engines.PlayersEngine;
 import fr.milekat.cite_core.core.engines.TeamEngine;
@@ -28,7 +25,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 public class MainCore extends JavaPlugin {
     // Init des var static, pour tous le projet
@@ -68,6 +68,7 @@ public class MainCore extends JavaPlugin {
         getCommand("web").setExecutor(new WebLinks());
         getCommand("speed").setExecutor(new Speed());
         getCommand("serialitem").setExecutor(new ItemSerialCMD());
+        getCommand("points").setExecutor(new PointsManagerCMD());
         // Tab
         getCommand("event").setTabCompleter(new Event_Tab());
         // Scoreboard
