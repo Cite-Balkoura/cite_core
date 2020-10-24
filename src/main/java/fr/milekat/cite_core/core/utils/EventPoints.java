@@ -11,7 +11,7 @@ public class EventPoints {
     public static void addPoint(UUID playeruuid, Integer points) throws SQLException {
         Connection connection = MainCore.getSQL().getConnection();
         PreparedStatement q = connection.prepareStatement("UPDATE `" + MainCore.SQLPREFIX +
-                "player` SET `quest_point` = `points_event` + ? WHERE `uuid` = ?;");
+                "player` SET `points_event` = `points_event` + ? WHERE `uuid` = ?;");
         q.setInt(1, points);
         q.setString(2, playeruuid.toString());
         q.execute();
@@ -21,7 +21,7 @@ public class EventPoints {
     public static void removePoint(UUID playeruuid, Integer points) throws SQLException {
         Connection connection = MainCore.getSQL().getConnection();
         PreparedStatement q = connection.prepareStatement("UPDATE `" + MainCore.SQLPREFIX +
-                "player` SET `quest_point` = `points_event` - ? WHERE `uuid` = ?;");
+                "player` SET `points_event` = `points_event` - ? WHERE `uuid` = ?;");
         q.setInt(1, points);
         q.setString(2, playeruuid.toString());
         q.execute();
