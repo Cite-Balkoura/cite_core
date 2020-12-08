@@ -11,12 +11,9 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 
 public class ServersManager {
-    private final ArrayList<String> survies = (ArrayList<String>) Arrays.asList(new String[]{"prague", "sydney", "bogota"});
 
     public void modoServersGui(Player player) {
         FastInv gui = new FastInv(InventoryType.CHEST, ChatColor.DARK_AQUA + "Servers Manager !");
