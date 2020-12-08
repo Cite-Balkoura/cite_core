@@ -3,6 +3,8 @@ package fr.milekat.cite_core;
 import fr.milekat.cite_core.chat.ChatInsert;
 import fr.milekat.cite_core.core.bungee.BungeeSendPlayer;
 import fr.milekat.cite_core.core.bungee.JoinQuitEvents;
+import fr.milekat.cite_core.core.bungee.ServersManager;
+import fr.milekat.cite_core.core.bungee.ServersUpdate;
 import fr.milekat.cite_core.core.commands.*;
 import fr.milekat.cite_core.core.crafts.CraftManager;
 import fr.milekat.cite_core.core.engines.PlayersEngine;
@@ -25,10 +27,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class MainCore extends JavaPlugin {
     // Init des var static, pour tous le projet
@@ -44,7 +43,9 @@ public class MainCore extends JavaPlugin {
     public static HashMap<UUID, Profil> profilHashMap = new HashMap<>();
     public static HashMap<String, UUID> joueurslist = new HashMap<>();
     public static HashMap<Integer, Team> teamHashMap = new HashMap<>();
+    public static TreeMap<Integer, String> serveurPlayers = new TreeMap<>();
     public static String SQLPREFIX = "balkoura_";
+    private BukkitTask serversUpdate;
 
     @Override
     public void onEnable() {
@@ -60,6 +61,7 @@ public class MainCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BungeeSendPlayer(),this);
         getServer().getPluginManager().registerEvents(new HammerNetheriteCraft(),this);
         getServer().getPluginManager().registerEvents(new DamageModifiers(),this);
+        getServer().getPluginManager().registerEvents(new ServersUpdate(), this);
         // Bungee Messaging
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         // Commandes
@@ -69,6 +71,7 @@ public class MainCore extends JavaPlugin {
         getCommand("speed").setExecutor(new Speed());
         getCommand("serialitem").setExecutor(new ItemSerialCMD());
         getCommand("points").setExecutor(new PointsManagerCMD());
+        getCommand("srv").setExecutor(new OpenServerManager());
         // Tab
         getCommand("event").setTabCompleter(new Event_Tab());
         // Scoreboard
@@ -80,6 +83,7 @@ public class MainCore extends JavaPlugin {
         // Engines
         profilesTask = new PlayersEngine().runTask();
         teamTask = new TeamEngine().runTask();
+        serversUpdate = new ServersUpdate().runTask();
     }
 
     @Override
@@ -88,6 +92,7 @@ public class MainCore extends JavaPlugin {
         new CraftManager().unLoadCraft();
         profilesTask.cancel();
         teamTask.cancel();
+        serversUpdate.cancel();
     }
 
     public static MainCore getInstance(){

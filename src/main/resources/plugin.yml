@@ -37,6 +37,10 @@ commands:
     usage: "/points <quest/event> <joueur> <add/remove/set> <points>"
     permission: modo.core.command.point
     permission-message: "§cVous n'avez pas la permission d'utiliser cette commande."
+  srv:
+    usage: "/srv"
+    permission: modo.serveurs.manager
+    permission-message: "§cVous n'avez pas la permission d'utiliser cette commande."
 permissions:
   modo.core.event.placebox:
     description: "E: Placer des eventbox"
