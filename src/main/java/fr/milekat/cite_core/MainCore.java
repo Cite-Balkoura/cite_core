@@ -43,7 +43,7 @@ public class MainCore extends JavaPlugin {
     public static HashMap<UUID, Profil> profilHashMap = new HashMap<>();
     public static HashMap<String, UUID> joueurslist = new HashMap<>();
     public static HashMap<Integer, Team> teamHashMap = new HashMap<>();
-    public static TreeMap<Integer, String> serveurPlayers = new TreeMap<>();
+    public static HashMap<String, Integer> serveurPlayers = new HashMap<>();
     public static String SQLPREFIX = "balkoura_";
     private BukkitTask serversUpdate;
 

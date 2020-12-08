@@ -1,6 +1,7 @@
 package fr.milekat.cite_core.core.bungee;
 
 import fr.milekat.cite_core.MainCore;
+import fr.milekat.cite_libs.MainLibs;
 import fr.milekat.cite_libs.core.events_register.RedisMessageReceive;
 import fr.milekat.cite_libs.utils_tools.Jedis.JedisPub;
 import org.bukkit.Bukkit;
@@ -21,14 +22,17 @@ public class ServersUpdate implements Listener {
         return new BukkitRunnable() {
             @Override
             public void run() {
-                HashMap<Integer, String> tempMap = new HashMap<>(MainCore.serveurPlayers);
-                for (Map.Entry<Integer, String> loop : tempMap.entrySet()) {
-                    if (!lastupdated.contains(loop.getValue())) MainCore.serveurPlayers.remove(loop.getKey());
+                HashMap<String, Integer> tempMap = new HashMap<>(MainCore.serveurPlayers);
+                for (Map.Entry<String, Integer> loop : tempMap.entrySet()) {
+                    if (!lastupdated.contains(loop.getKey())) MainCore.serveurPlayers.remove(loop.getKey());
                 }
                 lastupdated.clear();
                 if (!recentupdate) {
-                    JedisPub.sendRedis("update_servers_status#:#all");
-                    recentupdate = true;
+                    JedisPub.sendRedis("update_servers_status#:#" +
+                            MainLibs.getInstance().getConfig().get("other.join_server_name"));
+                    JedisPub.sendRedis("servers_status_reply#:#" +
+                            MainLibs.getInstance().getConfig().get("other.join_server_name")
+                            + "#:#" + Bukkit.getServer().getOnlinePlayers().size());
                 } else {
                     recentupdate = false;
                 }
@@ -39,10 +43,12 @@ public class ServersUpdate implements Listener {
     @EventHandler
     public void onRedisServersReply(RedisMessageReceive event) {
         if (event.getLabel().equalsIgnoreCase("servers_status_reply")) {
-            MainCore.serveurPlayers.put(Integer.parseInt(event.getArgs()[1]), event.getArgs()[0]);
+            MainCore.serveurPlayers.put(event.getArgs()[0], Integer.parseInt(event.getArgs()[1]));
             lastupdated.add(event.getArgs()[0]);
-        } else if (event.getLabel().equalsIgnoreCase("update_servers_satuts")) {
-            JedisPub.sendRedis("servers_status_reply#:#cite#:#" + Bukkit.getServer().getOnlinePlayers().size());
+        } else if (event.getLabel().equalsIgnoreCase("update_servers_status")) {
+            JedisPub.sendRedis(
+                    "servers_status_reply#:#" + MainLibs.getInstance().getConfig().get("other.join_server_name")
+                    + "#:#" + Bukkit.getServer().getOnlinePlayers().size());
             recentupdate = true;
         }
     }

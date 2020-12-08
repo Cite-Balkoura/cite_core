@@ -17,11 +17,11 @@ public class ServersManager {
 
     public void modoServersGui(Player player) {
         FastInv gui = new FastInv(InventoryType.CHEST, ChatColor.DARK_AQUA + "Servers Manager !");
-        gui.setItems(gui.getBorders(), new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).name("").build());
-        for (Map.Entry<Integer, String> loop : MainCore.serveurPlayers.entrySet()) {
-            gui.addItem(new ItemBuilder(Material.GRASS_BLOCK).name(loop.getValue()).name("").addLore("Population " + loop.getKey())
+        gui.setItems(gui.getBorders(), new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).name(" ").build());
+        for (Map.Entry<String, Integer> loop : MainCore.serveurPlayers.entrySet()) {
+            gui.addItem(new ItemBuilder(Material.GRASS_BLOCK).name(loop.getKey()).name(" ").addLore("Population " + loop.getValue())
                     .build(), e -> {
-                sendPlayerToServer(((Player) e.getWhoClicked()),loop.getValue(),null);
+                sendPlayerToServer(((Player) e.getWhoClicked()),loop.getKey(),null);
             });
             gui.open(player);
         }
