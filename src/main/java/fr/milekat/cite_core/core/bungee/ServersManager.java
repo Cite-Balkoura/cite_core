@@ -3,35 +3,16 @@ package fr.milekat.cite_core.core.bungee;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import fr.milekat.cite_core.MainCore;
+import fr.milekat.cite_libs.MainLibs;
 import fr.milekat.cite_libs.utils_tools.Jedis.JedisPub;
-import fr.mrmicky.fastinv.FastInv;
-import fr.mrmicky.fastinv.ItemBuilder;
-import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
-
-import java.util.Map;
 
 public class ServersManager {
-
-    public void modoServersGui(Player player) {
-        FastInv gui = new FastInv(InventoryType.CHEST, ChatColor.DARK_AQUA + "Servers Manager !");
-        gui.setItems(gui.getBorders(), new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).name(" ").build());
-        for (Map.Entry<String, Integer> loop : MainCore.serveurPlayers.entrySet()) {
-            gui.addItem(new ItemBuilder(Material.GRASS_BLOCK).name(loop.getKey()).name(" ").addLore("Population " + loop.getValue())
-                    .build(), e -> {
-                sendPlayerToServer(((Player) e.getWhoClicked()),loop.getKey(),null);
-            });
-            gui.open(player);
-        }
-    }
-
     public void sendPlayerToServer(Player player, String server, String loctype) {
+        if (loctype!=null) JedisPub.sendRedis(server + "#:#set_position#:#" + player.getName() + "#:#" + loctype);
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("Connect");
-        out.writeUTF(server);
+        out.writeUTF(MainLibs.getInstance().getConfig().getString("other.servers_list." + server));
         player.sendPluginMessage(MainCore.getInstance(), "BungeeCord", out.toByteArray());
-        if (loctype!=null) JedisPub.sendRedis(server + "#:#set_position#:#" + player.getName() + "#:#" + loctype);
     }
 }
