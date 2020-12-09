@@ -32,7 +32,6 @@ public class CraftManager {
         Bukkit.addRecipe(new Commons().customNetheriteIngot());
         Bukkit.addRecipe(new Commons().customEnchantedGoldApple());
         Bukkit.addRecipe(new Commons().customShulkerBox());
-        Bukkit.addRecipe(new Commons().customNetherWart());
     }
 
     /**

@@ -3,6 +3,7 @@ package fr.milekat.cite_core.core.engines;
 import fr.milekat.cite_core.MainCore;
 import fr.milekat.cite_core.core.obj.Profil;
 import fr.milekat.cite_core.core.obj.Team;
+import fr.milekat.cite_libs.MainLibs;
 import fr.milekat.cite_libs.utils_tools.Tools;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -30,7 +31,7 @@ public class TeamEngine {
     }
 
     public void updateTeams() {
-        Connection connection = MainCore.getSQL().getConnection();
+        Connection connection = MainLibs.getSql();
         try {
             PreparedStatement q = connection.prepareStatement("SELECT * FROM `" + MainCore.SQLPREFIX + "team`;");
             q.execute();
@@ -62,7 +63,7 @@ public class TeamEngine {
 
     public void saveTradesUses(Team team) {
         try {
-            Connection connection = MainCore.getSQL().getConnection();
+            Connection connection = MainLibs.getSql();
             PreparedStatement q = connection.prepareStatement(
                     "UPDATE `balkoura_team` SET `team_trades_uses`= ? WHERE `team_id` = ?;");
             q.setString(1, getStringTradesUses(team.getTradesuses()));

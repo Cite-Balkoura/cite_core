@@ -2,6 +2,7 @@ package fr.milekat.cite_core.core.engines;
 
 import fr.milekat.cite_core.MainCore;
 import fr.milekat.cite_core.core.obj.Profil;
+import fr.milekat.cite_libs.MainLibs;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -27,7 +28,7 @@ public class PlayersEngine {
     }
 
     public void updateProfiles(){
-        Connection connection = MainCore.getSQL().getConnection();
+        Connection connection = MainLibs.getSql();
         try {
             PreparedStatement q = connection.prepareStatement(
                     "SELECT  `uuid`, `name`, `team_id`, `chat_mode`, `muted`, `banned`, `reason`, " +

@@ -1,8 +1,10 @@
 package fr.milekat.cite_core.event_game;
 
 import fr.milekat.cite_core.MainCore;
+import fr.milekat.cite_libs.MainLibs;
 import fr.milekat.cite_libs.utils_tools.ItemSerial;
 import fr.milekat.cite_libs.utils_tools.Jedis.JedisPub;
+import fr.milekat.cite_libs.utils_tools.Jedis.JedisSubEvent;
 import fr.milekat.cite_libs.utils_tools.Tools;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -36,7 +38,7 @@ public class Event_Event implements Listener {
         if (event.getClickedBlock()==null) return;
         event.setCancelled(true);
         Block block = event.getClickedBlock().getRelative(event.getBlockFace());
-        Connection connection = MainCore.getSQL().getConnection();
+        Connection connection = MainLibs.getSql();
         try {
             PreparedStatement q = connection.prepareStatement(
                     "SELECT `event_box`, `lock_event_box` FROM `" + MainCore.SQLPREFIX + "player` WHERE `name` = ?;");
@@ -94,7 +96,7 @@ public class Event_Event implements Listener {
                 if (shulkerBox.getCustomName()==null) return;
                 if (shulkerBox.getCustomName().contains(MainCore.getEvents().boxModo)) {
                     if (event.getPlayer().hasPermission("modo.core.event.boxbreak")){
-                        Connection connection = MainCore.getSQL().getConnection();
+                        Connection connection = MainLibs.getSql();
                         String name = shulkerBox.getCustomName();
                         try {
                             PreparedStatement q = connection.prepareStatement("UPDATE `" + MainCore.SQLPREFIX +
@@ -131,7 +133,7 @@ public class Event_Event implements Listener {
             if (!event.getCursor().getType().equals(Material.AIR)) return;
             if (Tools.canStore(event.getWhoClicked().getInventory(),36,event.getCurrentItem(),1)){
                 try {
-                    Connection connection = MainCore.getSQL().getConnection();
+                    Connection connection = MainLibs.getSql();
                     ItemStack item = event.getCurrentItem();
                     event.getView().setItem(event.getSlot(),null);
                     PreparedStatement q = connection.prepareStatement("UPDATE `" + MainCore.SQLPREFIX + "player` " +
@@ -155,5 +157,11 @@ public class Event_Event implements Listener {
             if (event.getClickedInventory().getType().equals(InventoryType.PLAYER)) return;
             event.setCancelled(true);
         }
+    }
+
+    @EventHandler
+    public void onRedisReceive(JedisSubEvent event){
+        String[] msg = event.getFullArgs();
+        if (event.getLabel().equalsIgnoreCase("closeeventbox")) Event_Utils.closeEventBox(msg[1]);
     }
 }

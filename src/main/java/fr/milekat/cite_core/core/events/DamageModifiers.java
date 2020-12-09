@@ -38,76 +38,49 @@ public class DamageModifiers implements Listener {
         ItemStack tool = player.getInventory().getItemInMainHand();
         String weapon = tool.getType().name();
         switch (weapon) {
-            //Swords
+            //  Swords
             case "NETHERITE_SWORD":
-                damageConverter(event, tool, 1);
-                break;
-            case "DIAMOND_SWORD":
-                damageConverter(event, tool, 1);
-                break;
             case "GOLDEN_SWORD":
             case "GOLD_SWORD":
-                damageConverter(event, tool, 1);
-                break;
+            case "DIAMOND_SWORD":
             case "IRON_SWORD":
-                damageConverter(event, tool, 1);
-                break;
             case "STONE_SWORD":
-                damageConverter(event, tool, 1);
-                break;
             case "WOODEN_SWORD":
+            case "GOLDEN_HOE":
+            case "GOLD_HOE":
+            case "WOODEN_HOE":
                 damageConverter(event, tool, 1);
                 break;
-            //Pickaxes
+            //  Pickaxes
             case "NETHERITE_PICKAXE":
-                damageConverter(event, tool, 0);
-                break;
             case "DIAMOND_PICKAXE":
-                damageConverter(event, tool, 0);
-                break;
             case "GOLDEN_PICKAXE":
             case "GOLD_PICKAXE":
-                damageConverter(event, tool, 0);
-                break;
             case "IRON_PICKAXE":
-                damageConverter(event, tool, 0);
-                break;
             case "STONE_PICKAXE":
-                damageConverter(event, tool, 0);
-                break;
             case "WOODEN_PICKAXE":
                 damageConverter(event, tool, 0);
                 break;
-            //Axes
+            //  Axes
             case "NETHERITE_AXE":
-                damageConverter(event, tool, -2);
-                break;
             case "DIAMOND_AXE":
                 damageConverter(event, tool, -2);
                 break;
             case "GOLDEN_AXE":
             case "GOLD_AXE":
-                damageConverter(event, tool, -3);
-                break;
             case "IRON_AXE":
+            case "WOODEN_AXE":
                 damageConverter(event, tool, -3);
                 break;
             case "STONE_AXE":
                 damageConverter(event, tool, -4);
                 break;
-            case "WOODEN_AXE":
-                damageConverter(event, tool, -3);
-                break;
-            //Hoes (Again, the tool!)
+            //  Hoes (Again, the tool!)
             case "NETHERITE_HOE":
                 damageConverter(event, tool, 5);
                 break;
             case "DIAMOND_HOE":
                 damageConverter(event, tool, 4);
-                break;
-            case "GOLDEN_HOE":
-            case "GOLD_HOE":
-                damageConverter(event, tool, 1);
                 break;
             case "IRON_HOE":
                 damageConverter(event, tool, 3);
@@ -115,31 +88,18 @@ public class DamageModifiers implements Listener {
             case "STONE_HOE":
                 damageConverter(event, tool, 2);
                 break;
-            case "WOODEN_HOE":
-                damageConverter(event, tool, 1);
-                break;
-            //Shovels
+            //  Shovels
             case "NETHERITE_SHOVEL":
-                damageConverter(event, tool, -0.5);
-                break;
             case "DIAMOND_SHOVEL":
             case "DIAMOND_SPADE":
-                damageConverter(event, tool, -0.5);
-                break;
             case "GOLDEN_SHOVEL":
             case "GOLDEN_SPADE":
             case "GOLD_SHOVEL":
             case "GOLD_SPADE":
-                damageConverter(event, tool, -0.5);
-                break;
             case "IRON_SHOVEL":
             case "IRON_SPADE":
-                damageConverter(event, tool, -0.5);
-                break;
             case "STONE_SHOVEL":
             case "STONE_SPADE":
-                damageConverter(event, tool, -0.5);
-                break;
             case "WOODEN_SHOVEL":
             case "WOODEN_SPADE":
                 damageConverter(event, tool, -0.5);

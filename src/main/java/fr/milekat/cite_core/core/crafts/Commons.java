@@ -6,7 +6,6 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.ShapelessRecipe;
 
 public class Commons {
     public Recipe customNetheriteIngot() {
@@ -35,15 +34,6 @@ public class Commons {
         recipe.setIngredient('W', Material.WITHER_SKELETON_SKULL);
         recipe.setIngredient('N', Material.NETHERITE_INGOT);
         recipe.setIngredient('E', Material.ENDER_CHEST);
-        return recipe;
-    }
-
-    public Recipe customNetherWart() {
-        NamespacedKey key = new NamespacedKey(MainCore.getInstance(), "nether_wart");
-        ItemStack itemStack = new ItemStack(Material.NETHER_WART);
-        itemStack.setAmount(9);
-        ShapelessRecipe recipe = new ShapelessRecipe(key, itemStack);
-        recipe.addIngredient(Material.NETHER_WART_BLOCK);
         return recipe;
     }
 }

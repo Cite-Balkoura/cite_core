@@ -3,16 +3,15 @@ package fr.milekat.cite_core.core.bungee;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import fr.milekat.cite_core.MainCore;
-import fr.milekat.cite_libs.MainLibs;
 import fr.milekat.cite_libs.utils_tools.Jedis.JedisPub;
 import org.bukkit.entity.Player;
 
-public class ServersManager {
+public class ServersManagerSendPlayer {
     public void sendPlayerToServer(Player player, String server, String loctype) {
-        if (loctype!=null) JedisPub.sendRedis(server + "#:#set_position#:#" + player.getName() + "#:#" + loctype);
+        if (loctype!=null) JedisPub.sendRedis(server + "#:#set_position#:#" + player.getName() + "#:#label#:#" + loctype);
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("Connect");
-        out.writeUTF(MainLibs.getInstance().getConfig().getString("other.servers_list." + server));
+        out.writeUTF(server);
         player.sendPluginMessage(MainCore.getInstance(), "BungeeCord", out.toByteArray());
     }
 }

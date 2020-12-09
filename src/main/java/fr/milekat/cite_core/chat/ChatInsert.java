@@ -1,6 +1,7 @@
 package fr.milekat.cite_core.chat;
 
 import fr.milekat.cite_core.MainCore;
+import fr.milekat.cite_libs.MainLibs;
 import fr.milekat.cite_libs.utils_tools.DateMilekat;
 import org.bukkit.Bukkit;
 
@@ -15,7 +16,7 @@ public class ChatInsert {
      * @return l'id du msg si besoin
      */
     public static int insertSQLNewChat(String msg) {
-        Connection connection = MainCore.getSQL().getConnection();
+        Connection connection = MainLibs.getSql();
         int id = 0;
         try {
             PreparedStatement q = connection.prepareStatement("INSERT INTO `" + MainCore.SQLPREFIX +

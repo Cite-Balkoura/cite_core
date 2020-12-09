@@ -1,6 +1,7 @@
 package fr.milekat.cite_core.core.utils;
 
 import fr.milekat.cite_core.MainCore;
+import fr.milekat.cite_libs.MainLibs;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +10,7 @@ import java.util.UUID;
 
 public class EventPoints {
     public static void addPoint(UUID playeruuid, Integer points) throws SQLException {
-        Connection connection = MainCore.getSQL().getConnection();
+        Connection connection = MainLibs.getSql();
         PreparedStatement q = connection.prepareStatement("UPDATE `" + MainCore.SQLPREFIX +
                 "player` SET `points_event` = `points_event` + ? WHERE `uuid` = ?;");
         q.setInt(1, points);
@@ -19,7 +20,7 @@ public class EventPoints {
     }
 
     public static void removePoint(UUID playeruuid, Integer points) throws SQLException {
-        Connection connection = MainCore.getSQL().getConnection();
+        Connection connection = MainLibs.getSql();
         PreparedStatement q = connection.prepareStatement("UPDATE `" + MainCore.SQLPREFIX +
                 "player` SET `points_event` = `points_event` - ? WHERE `uuid` = ?;");
         q.setInt(1, points);
@@ -29,7 +30,7 @@ public class EventPoints {
     }
 
     public static void setPoint(UUID playeruuid, Integer points) throws SQLException {
-        Connection connection = MainCore.getSQL().getConnection();
+        Connection connection = MainLibs.getSql();
         PreparedStatement q = connection.prepareStatement("UPDATE `" + MainCore.SQLPREFIX +
                 "player` SET `points_event` = ? WHERE `uuid` = ?;");
         q.setInt(1, points);

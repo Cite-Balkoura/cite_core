@@ -29,7 +29,7 @@ public class Event_Cmd implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("event")){
             if (!(sender instanceof Player)) return true;
             Player p = (Player) sender;
-            Connection connection = MainCore.getSQL().getConnection();
+            Connection connection = MainLibs.getSql();
             if (args.length<1) {
                 sendHelpEvent((Player) sender);
                 return true;
