@@ -22,7 +22,7 @@ public class ServersManagerSendPlayer {
     /**
      *      Send player to server at location label
      */
-    public void sendPlayerToServerWithLabel(Player player, String server, String pos) {
+    public void sendPlayerToServer(Player player, String server, String pos) {
         JedisPub.sendRedis(server + "#:#set_position#:#" + player.getName() + "#:#label#:#" + pos);
         sendPlayerToServer(player, server);
     }
@@ -30,8 +30,9 @@ public class ServersManagerSendPlayer {
     /**
      *      Send player to server at location xyz
      */
-    public void sendPlayerToServerWithLoc(Player player, String server, Location loc) {
-        JedisPub.sendRedis(server + "#:#set_position#:#" + player.getName() + "#:#loc#:#" + LocationParser.getString(loc));
+    public void sendPlayerToServer(Player player, String server, String world, Location loc) {
+        JedisPub.sendRedis(server + "#:#set_position#:#" + player.getName() + "#:#loc#:#" +
+                world + ":" + LocationParser.getString(loc));
         sendPlayerToServer(player, server);
     }
 }
