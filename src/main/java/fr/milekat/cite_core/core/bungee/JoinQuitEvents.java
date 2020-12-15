@@ -26,10 +26,12 @@ public class JoinQuitEvents implements Listener {
             if (player==null) {
                 //  if not store his new location for when he join
                 newPlayerLoc.put(event.getArgs()[1], MainCore.locLabels.getOrDefault(
-                        MainLibs.getInstance().getConfig().getString("redis.thischannel") + "_boat",
+                        MainLibs.getInstance().getConfig().getString("redis.thischannel") + event.getArgs()[3],
                         MainCore.defaultLocation));
             } else {
-                player.teleport(LocationParser.getLocation(event.getArgs()[3], event.getArgs()[4]));
+                player.teleport(MainCore.locLabels.getOrDefault(
+                        MainLibs.getInstance().getConfig().getString("redis.thischannel") + event.getArgs()[3],
+                        MainCore.defaultLocation));
             }
         } else if (event.getArgs()[2].equalsIgnoreCase("loc") && event.getArgs().length == 5) {
             //  Check if player has join the server
