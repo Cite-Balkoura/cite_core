@@ -24,7 +24,7 @@ public class ServersManagerOpenGui implements CommandExecutor {
                 JedisServer server = MainLibs.jedisServers.get(loop);
                 gui.addItem(new ItemBuilder(server.getMaterial()).name(server.getName()).addLore("Population " + players).build(), e -> {
                     e.setCancelled(true);
-                    new ServersManagerSendPlayer().sendPlayerToServer(((Player) e.getWhoClicked()),server.getChannel(),null);
+                    new ServersManagerSendPlayer().sendPlayerToServer(((Player) e.getWhoClicked()),server.getChannel());
                 });
             }
             gui.open((Player) sender);
