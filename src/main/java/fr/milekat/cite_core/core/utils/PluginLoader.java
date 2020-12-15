@@ -45,7 +45,7 @@ public class PluginLoader {
     }
 
     /**
-     *
+     *      Load all location labels from the SQL
      */
     public void loadLabels() {
         try {

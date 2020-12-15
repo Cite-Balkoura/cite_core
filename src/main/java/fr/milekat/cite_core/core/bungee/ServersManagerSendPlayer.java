@@ -32,7 +32,7 @@ public class ServersManagerSendPlayer {
      */
     public void sendPlayerToServer(Player player, String server, String world, Location loc) {
         JedisPub.sendRedis(server + "#:#set_position#:#" + player.getName() + "#:#loc#:#" +
-                world + ":" + LocationParser.getString(loc));
+                world + "#:#" + LocationParser.getString(loc));
         sendPlayerToServer(player, server);
     }
 }

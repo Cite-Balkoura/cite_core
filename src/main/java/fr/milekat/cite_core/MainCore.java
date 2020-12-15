@@ -12,6 +12,7 @@ import fr.milekat.cite_core.event_game.Event_Init;
 import fr.milekat.cite_core.event_game.Event_Tab;
 import fr.milekat.cite_libs.MainLibs;
 import fr.milekat.cite_libs.utils_tools.Jedis.JedisPub;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -31,6 +32,7 @@ public class MainCore extends JavaPlugin {
     private static MainCore mainCore;
     private static Event_Init events;
     // Core
+    public static Location defaultLocation = new Location(Bukkit.getWorld("wolrd"),0,150,0);
     public static HashMap<UUID, Profil> profilHashMap = new HashMap<>();
     public static HashMap<String, UUID> joueurslist = new HashMap<>();
     public static HashMap<Integer, Team> teamHashMap = new HashMap<>();
