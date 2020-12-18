@@ -8,6 +8,7 @@ import fr.milekat.cite_core.core.bungee.ServersUpdateEvent;
 import fr.milekat.cite_core.core.commands.*;
 import fr.milekat.cite_core.core.events.DamageModifiers;
 import fr.milekat.cite_core.core.events.HammerNetheriteCraft;
+import fr.milekat.cite_core.core.topluck.openGui;
 import fr.milekat.cite_core.event_game.Event_Cmd;
 import fr.milekat.cite_core.event_game.Event_Event;
 import fr.milekat.cite_libs.MainLibs;
@@ -35,6 +36,7 @@ public class PluginLoader {
      *      Chargement des commandes
      */
     public void loadCommands(JavaPlugin plugin) {
+        plugin.getCommand("topluck").setExecutor(new openGui());
         plugin.getCommand("event").setExecutor(new Event_Cmd());
         plugin.getCommand("sign").setExecutor(new SignEdit());
         plugin.getCommand("web").setExecutor(new WebLinks());
