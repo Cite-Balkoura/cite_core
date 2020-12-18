@@ -41,6 +41,11 @@ commands:
     usage: "/srv"
     permission: modo.serveurs.manager
     permission-message: "§cVous n'avez pas la permission d'utiliser cette commande."
+  topluck:
+    usage: "/topluck"
+    description: "Liste de toutes les commandes relatives au events"
+    permission: modo.core.command.topluck
+    permission-message: "§cVous n'avez pas la permission d'utiliser cette commande."
 permissions:
   modo.core.event.placebox:
     description: "E: Placer des eventbox"
