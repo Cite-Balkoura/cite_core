@@ -5,6 +5,7 @@ import com.google.common.io.ByteStreams;
 import fr.milekat.cite_core.MainCore;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Sign;
+import org.bukkit.block.data.type.WallSign;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -17,7 +18,7 @@ public class BungeeSendPlayer implements Listener {
     public void onSignClick(PlayerInteractEvent event){
         if (event.getClickedBlock()==null) return;
         if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) return;
-        if (!(event.getClickedBlock().getBlockData() instanceof Sign)) return;
+        if (!(event.getClickedBlock().getBlockData() instanceof WallSign)) return;
         Sign sign = (Sign) event.getClickedBlock().getState();
         if (!sign.getLine(0).equalsIgnoreCase("§8[§aTéléportation§8]")) return;
         ByteArrayDataOutput out = ByteStreams.newDataOutput();

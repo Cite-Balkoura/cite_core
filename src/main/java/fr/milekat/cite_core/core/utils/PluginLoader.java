@@ -6,6 +6,7 @@ import fr.milekat.cite_core.core.bungee.JoinQuitEvents;
 import fr.milekat.cite_core.core.bungee.ServersManagerOpenGui;
 import fr.milekat.cite_core.core.bungee.ServersUpdateEvent;
 import fr.milekat.cite_core.core.commands.*;
+import fr.milekat.cite_core.core.commands.chest.LootCrates;
 import fr.milekat.cite_core.core.events.DamageModifiers;
 import fr.milekat.cite_core.core.events.HammerNetheriteCraft;
 import fr.milekat.cite_core.core.events.PlayerDeathInventory;
@@ -38,6 +39,7 @@ public class PluginLoader {
      *      Chargement des commandes
      */
     public void loadCommands(JavaPlugin plugin) {
+        plugin.getCommand("crate").setExecutor(new LootCrates());
         plugin.getCommand("topluck").setExecutor(new openGui());
         plugin.getCommand("event").setExecutor(new Event_Cmd());
         plugin.getCommand("sign").setExecutor(new SignEdit());

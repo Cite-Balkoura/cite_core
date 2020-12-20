@@ -2,6 +2,8 @@ package fr.milekat.cite_core;
 
 import fr.milekat.cite_core.chat.ChatInsert;
 import fr.milekat.cite_core.core.bungee.ServersUpdateEngine;
+import fr.milekat.cite_core.core.commands.chest.LootCrates;
+import fr.milekat.cite_core.core.commands.chest.LootCratesTAB;
 import fr.milekat.cite_core.core.crafts.CraftManager;
 import fr.milekat.cite_core.core.engines.PlayersEngine;
 import fr.milekat.cite_core.core.engines.TeamEngine;
@@ -61,6 +63,7 @@ public class MainCore extends JavaPlugin {
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         // Tab
         getCommand("event").setTabCompleter(new Event_Tab());
+        getCommand("crate").setTabCompleter(new LootCratesTAB());
         // Craft
         new CraftManager().loadCraft();
         // Engines

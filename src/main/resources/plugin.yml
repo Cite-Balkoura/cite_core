@@ -51,6 +51,9 @@ commands:
     description: "Donne le dernier inventaire avant la mort d'un joueur"
     permission: modo.core.lastinv
     permission-message: "§cVous n'avez pas la permission d'utiliser cette commande."
+  crate:
+    permission: modo.box.command.crate.edit
+    permission-message: "§cVous n'avez pas la permission d'utiliser cette commande."
 permissions:
   modo.core.event.placebox:
     description: "E: Placer des eventbox"
