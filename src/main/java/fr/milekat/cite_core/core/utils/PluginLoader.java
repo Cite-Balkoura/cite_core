@@ -8,6 +8,7 @@ import fr.milekat.cite_core.core.bungee.ServersUpdateEvent;
 import fr.milekat.cite_core.core.commands.*;
 import fr.milekat.cite_core.core.events.DamageModifiers;
 import fr.milekat.cite_core.core.events.HammerNetheriteCraft;
+import fr.milekat.cite_core.core.events.PlayerDeathInventory;
 import fr.milekat.cite_core.core.topluck.openGui;
 import fr.milekat.cite_core.event_game.Event_Cmd;
 import fr.milekat.cite_core.event_game.Event_Event;
@@ -30,6 +31,7 @@ public class PluginLoader {
         plugin.getServer().getPluginManager().registerEvents(new HammerNetheriteCraft(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new DamageModifiers(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new ServersUpdateEvent(), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new PlayerDeathInventory(), plugin);
     }
 
     /**
