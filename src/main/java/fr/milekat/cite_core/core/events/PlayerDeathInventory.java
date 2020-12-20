@@ -1,8 +1,11 @@
 package fr.milekat.cite_core.core.events;
 
+import com.google.common.collect.ObjectArrays;
 import fr.milekat.cite_libs.MainLibs;
 import fr.milekat.cite_libs.utils_tools.ItemSerial;
+import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -17,8 +20,10 @@ public class PlayerDeathInventory implements Listener {
 
     @EventHandler
     public void playerDeath(PlayerDeathEvent e){
-        String inventory = ItemSerial.invToBase64(e.getEntity().getInventory().getContents());
-        updateInventory(e.getEntity().getUniqueId(), inventory);
+        ItemStack[] armors = e.getEntity().getInventory().getArmorContents();
+        ItemStack[] inventory = e.getEntity().getInventory().getContents();
+        ItemStack[] fullInventory = ObjectArrays.concat(armors, inventory, ItemStack.class);
+        updateInventory(e.getEntity().getUniqueId(), ItemSerial.invToBase64(fullInventory));
     }
 
     public static void updateInventory(UUID uuid, String inventory) {
