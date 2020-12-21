@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.sql.SQLException;
+import java.util.UUID;
 
 public class PointsManagerCMD implements CommandExecutor {
     @Override
@@ -18,46 +19,41 @@ public class PointsManagerCMD implements CommandExecutor {
             sendHelp(sender, label);
             return true;
         }
-        Player player = Bukkit.getPlayer(args[1]);
-        if (player==null) {
-            sender.sendMessage(MainCore.prefixCmd + "§cJoueur non connecté.");
-            sender.sendMessage("§6/" + label + " <event/quest> <joueur>");
-        } else {
-            int points;
-            try {
-                points = Integer.parseInt(args[3]);
-            } catch (NumberFormatException exception)  {
-                sender.sendMessage(MainCore.prefixCmd + "§cMerci de mettre un nombre de point(s) entier.");
-                return true;
-            }
-            try {
-                if (args[0].equalsIgnoreCase("event")) {
-                    if (args[2].equalsIgnoreCase("add")) {
-                        EventPoints.addPoint(player.getUniqueId(), points);
-                        sender.sendMessage(MainCore.prefixCmd + "§6Points ajoutés.");
-                    } else if (args[2].equalsIgnoreCase("remove")) {
-                        EventPoints.removePoint(player.getUniqueId(), points);
-                        sender.sendMessage(MainCore.prefixCmd + "§6Points retirés.");
-                    } else if (args[2].equalsIgnoreCase("set")) {
-                        EventPoints.setPoint(player.getUniqueId(), points);
-                        sender.sendMessage(MainCore.prefixCmd + "§6Points définis.");
-                    } else sendHelp(sender, label);
-                } else if (args[0].equalsIgnoreCase("quest")) {
-                    if (args[2].equalsIgnoreCase("add")) {
-                        QuestPoints.addPoint(player.getUniqueId(), points);
-                        sender.sendMessage(MainCore.prefixCmd + "§6Points ajoutés.");
-                    } else if (args[2].equalsIgnoreCase("remove")) {
-                        QuestPoints.removePoint(player.getUniqueId(), points);
-                        sender.sendMessage(MainCore.prefixCmd + "§6Points retirés.");
-                    } else if (args[2].equalsIgnoreCase("set")) {
-                        QuestPoints.setPoint(player.getUniqueId(), points);
-                        sender.sendMessage(MainCore.prefixCmd + "§6Points définis.");
-                    } else sendHelp(sender, label);
+        UUID uuid = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
+        int points;
+        try {
+            points = Integer.parseInt(args[3]);
+        } catch (NumberFormatException exception)  {
+            sender.sendMessage(MainCore.prefixCmd + "§cMerci de mettre un nombre de point(s) entier.");
+            return true;
+        }
+        try {
+            if (args[0].equalsIgnoreCase("event")) {
+                if (args[2].equalsIgnoreCase("add")) {
+                    EventPoints.addPoint(uuid, points);
+                    sender.sendMessage(MainCore.prefixCmd + "§6Points ajoutés.");
+                } else if (args[2].equalsIgnoreCase("remove")) {
+                    EventPoints.removePoint(uuid, points);
+                    sender.sendMessage(MainCore.prefixCmd + "§6Points retirés.");
+                } else if (args[2].equalsIgnoreCase("set")) {
+                    EventPoints.setPoint(uuid, points);
+                    sender.sendMessage(MainCore.prefixCmd + "§6Points définis.");
                 } else sendHelp(sender, label);
-            } catch (SQLException throwables) {
-                sender.sendMessage(MainCore.prefixCmd + "§cErreur SQL.");
-                throwables.printStackTrace();
-            }
+            } else if (args[0].equalsIgnoreCase("quest")) {
+                if (args[2].equalsIgnoreCase("add")) {
+                    QuestPoints.addPoint(uuid, points);
+                    sender.sendMessage(MainCore.prefixCmd + "§6Points ajoutés.");
+                } else if (args[2].equalsIgnoreCase("remove")) {
+                    QuestPoints.removePoint(uuid, points);
+                    sender.sendMessage(MainCore.prefixCmd + "§6Points retirés.");
+                } else if (args[2].equalsIgnoreCase("set")) {
+                    QuestPoints.setPoint(uuid, points);
+                    sender.sendMessage(MainCore.prefixCmd + "§6Points définis.");
+                } else sendHelp(sender, label);
+            } else sendHelp(sender, label);
+        } catch (SQLException throwables) {
+            sender.sendMessage(MainCore.prefixCmd + "§cErreur SQL.");
+            throwables.printStackTrace();
         }
         return true;
     }

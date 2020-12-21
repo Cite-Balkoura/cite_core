@@ -39,6 +39,7 @@ public class PluginLoader {
      *      Chargement des commandes
      */
     public void loadCommands(JavaPlugin plugin) {
+        plugin.getCommand("getlastinv").setExecutor(new LastInventoryCMD());
         plugin.getCommand("crate").setExecutor(new LootCrates());
         plugin.getCommand("topluck").setExecutor(new openGui());
         plugin.getCommand("event").setExecutor(new Event_Cmd());

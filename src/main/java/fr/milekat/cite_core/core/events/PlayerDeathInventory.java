@@ -35,7 +35,7 @@ public class PlayerDeathInventory implements Listener {
                     "(SELECT `player_id` FROM `balkoura_player` WHERE `uuid` = '" + uuid.toString() + "'), ?) " +
                     "ON DUPLICATE KEY UPDATE `inventory` = ?;");
             q.setString(1, inventory);
-            q.setString(1, inventory);
+            q.setString(2, inventory);
             q.execute();
             q.close();
         } catch (SQLException throwables) {

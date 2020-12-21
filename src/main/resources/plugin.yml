@@ -46,7 +46,7 @@ commands:
     description: "Liste de toutes les commandes relatives au events"
     permission: modo.core.command.topluck
     permission-message: "§cVous n'avez pas la permission d'utiliser cette commande."
-  topluck:
+  getlastinv:
     usage: "/getlastinv <joueur>"
     description: "Donne le dernier inventaire avant la mort d'un joueur"
     permission: modo.core.lastinv

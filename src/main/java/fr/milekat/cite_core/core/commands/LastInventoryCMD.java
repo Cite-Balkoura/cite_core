@@ -26,25 +26,26 @@ public class LastInventoryCMD implements CommandExecutor {
                 if (args.length == 1){
                     OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
                     ItemStack[] inv = PlayerDeathInventory.getLastInventory(target.getUniqueId());
-                    if (inv.length == 0){
+                    if (inv.length == 0 || inv[0] == null){
                         p.sendMessage(MainCore.prefixCmd + "§cJoueur introuvable ou inventaire vide !");
-                        return false;
+                        return true;
                     }
                     ItemStack[] armorInventory = new ItemStack[] {inv[0], inv[1], inv[2], inv[3]};
                     p.getInventory().setArmorContents(armorInventory);
                     for (int i = 4; i < inv.length; i++) {
                         p.getInventory().setItem(i-4, inv[i]);
                     }
-                    p.sendMessage(MainCore.prefixCmd + "§fInventaire défini !");
+                    p.sendMessage(MainCore.prefixCmd + "§fInventaire donné !");
+                    return true;
                 } else {
                     p.sendMessage(MainCore.prefixCmd + "§cVous devez préciser le nom d'un joueur !");
+                    return true;
                 }
             } else {
                 sender.sendMessage(MainLibs.prefixConsole + "Vous devez être un joueur !");
-                return false;
+                return true;
             }
         }
-
         return false;
     }
 }
